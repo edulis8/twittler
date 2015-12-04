@@ -43,6 +43,8 @@ var generateRandomTweet = function(){
   tweet.user = randomElement(users);
   tweet.message = randomMessage();
   tweet.created_at = new Date();
+  
+
   addTweet(tweet);
   //console.log(tweet);
 
@@ -56,12 +58,9 @@ var scheduleNextTweet = function(){
   generateRandomTweet();
 
   // Append new tweets. Can this be done in index.html? How to "listen" for a function call or array change?
-  var index = streams.home.length - 1;
-  var tweet = streams.home[index];
-  var $tweet = $('<div></div>');
-  $tweet.html('@' + tweet.user + ': ' + tweet.message +" <small>("+tweet.created_at+")</small>");
-  $tweet.prependTo(document.body);
+  prependTweet();
   // --------
+
   setTimeout(scheduleNextTweet, Math.random() * 4500);
 };
 scheduleNextTweet();
@@ -77,3 +76,23 @@ var writeTweet = function(message){
   tweet.message = message;
   addTweet(tweet);
 };
+
+
+ function prependTweet(){
+          var index = streams.home.length - 1;
+          var tweet = streams.home[index];
+          var $tweet = $('<div class="tweet-div"></div>');
+          $tweet.html(htmlizeMessage(tweet.user, tweet.message, tweet.created_at));
+          $tweet.prependTo($('section'));
+        }
+
+function formatDate(date){
+
+  return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " (PST) - " + date.toLocaleDateString()
+}
+
+function htmlizeMessage(user, message, date){
+  return '<a href="" class="user">@' + user +
+   ':</a><span class="message">' + message +
+   '</span><span class="date"> ('+formatDate(date)+')</span>';
+}

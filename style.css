@@ -1,0 +1,72 @@
+body {
+	font-family: 'Fira Sans', sans-serif;
+	background-color: linen;
+	width: 800px;
+	height: 100%;
+	margin: 0 auto;
+
+}
+
+h1 {
+	display: inline-block;
+}
+
+form{
+	margin-left: 20px;
+	display: inline-block;
+}
+
+input {
+	border: 1px solid black;
+	border-radius: 3px;
+	padding: 2px;
+}
+
+section {
+	float: left;
+	width: 400px;
+	
+}
+
+aside {
+	float: left;
+	width: 200px;
+	
+
+}
+
+
+.tweet-div {
+	border: 1px solid black;
+	width: 375px;
+	margin: 5px 0 5px 0;
+	padding: 5px;
+	background-color: ghostwhite;
+	
+}
+
+.tweet-div:first-of-type {
+	border-radius: 15px 15px 0px 0px;
+}
+
+.tweet-div:hover {
+	background-color: #f5f8fa;
+	cursor: pointer;
+}
+
+.tweet-div:last-of-type {
+	border-radius: 0px 0px 15px 15px;
+}
+
+
+.date {
+	font-size: 12px;
+	font-weight: 300;
+
+}
+
+.user{
+	display: block;
+	font-weight: 500;
+}
+

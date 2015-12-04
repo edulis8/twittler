@@ -3,30 +3,49 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Fira+Sans:400,500,300' rel='stylesheet' type='text/css'>
   </head>
   <body>
+  <header>
+    <h1>Twittler</h1><form action="">
+      <input type="text" placeholder="tweet something ridiculous">
+    </form>
+  </header>
+
+  <section>
+
+  </section>
+
+  <aside>
+    
+  </aside>
+
+
+
+
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+        var $body = $('section');
+        //$body.html('');
 
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.html('@' + tweet.user + ': ' + tweet.message + 
-            " <small>("+tweet.created_at+")</small>");
+          var $tweet = $('<div class="tweet-div"></div>');
+          $tweet.html(htmlizeMessage(tweet.user, tweet.message, tweet.created_at));
           $tweet.appendTo($body);
           index -= 1;
         }
 
-        window.setInterval(console.log(streams.home, 2000));
+        
 
 
 
       });
 
     </script>
+
   </body>
 </html>
