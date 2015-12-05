@@ -18,6 +18,8 @@
   </section>
 
   <aside>
+  
+
     
   </aside>
 
@@ -41,7 +43,53 @@
 
         
 
+        // EVENT LISTENERS
+        $(document.body).on('click', '.tweet-div',function() {
+          
+          var username = $(this).children(":first").text();
+          username = username.slice(1, username.length-1); // Remove @ and :
 
+          displayTimeline(username);
+
+          console.log(username);
+        });
+
+       
+
+        // FUNCTIONS
+
+        function displayTimeline(username){
+
+          var length = streams.users[username].length;
+
+          $('aside').empty();
+
+          $('aside').html("<div class='timeline'><h2>"+username+"'s timeline</h2></div>");
+
+          streams.users[username].forEach(function(element){
+
+              $('.timeline').append("<p><span class='sidebar-date'>"+(element.created_at)+":</span><br/>"+
+                element.message+"</p>");
+
+          
+          
+
+          setTimeout(function(){
+            var newlength = streams.users[username.length];
+            if(newlength > length){
+              var date = streams.users[username].created_at[newlength-1],
+                  msg = streams.users[username].message[newlength-1];
+
+              $('.timeline').append("<p><span class='sidebar-date'>"+date+":</span><br/>"+
+                msg+"</p>");
+            }
+          }, 500);
+
+
+          });
+
+
+        }
 
       });
 

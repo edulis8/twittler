@@ -13,11 +13,25 @@ streams.users.mracus = [];
 streams.users.douglascalhoun = [];
 window.users = Object.keys(streams.users);
 
+
+// EVENT LISTENERS
+        $(document.body).on('click', '.tweet-div',function() {
+          
+          var username = $(this).children(":first").text();
+          username = username.slice(1, username.length-1); // Remove @ and :
+
+          displayTimeline(username);
+
+          console.log(username);
+        });
+
+
 // utility function for adding tweets to our data structures
 var addTweet = function(newTweet){
   var username = newTweet.user;
   streams.users[username].push(newTweet);
   streams.home.push(newTweet);
+
 };
 
 // utility function
@@ -57,13 +71,16 @@ for(var i = 0; i < 10; i++){
 var scheduleNextTweet = function(){
   generateRandomTweet();
 
-  // Append new tweets. Can this be done in index.html? How to "listen" for a function call or array change?
+  // Append new tweets. Can this be done in index.html? 
+  //How to "listen" for a function call or array change?
   prependTweet();
   // --------
 
   setTimeout(scheduleNextTweet, Math.random() * 4500);
 };
 scheduleNextTweet();
+
+   console.log(streams);
 
 // utility function for letting students add "write a tweet" functionality
 // (note: not used by the rest of this file.)
@@ -92,7 +109,19 @@ function formatDate(date){
 }
 
 function htmlizeMessage(user, message, date){
-  return '<a href="" class="user">@' + user +
+  return '<a class="user '+user+'">@' + user +
    ':</a><span class="message">' + message +
-   '</span><span class="date"> ('+formatDate(date)+')</span>';
+   '</span><span class="date">'+formatDate(date)+'</span>';
 }
+
+
+ // EVENT LISTENERS
+        $('.tweet-div').click(function() {
+          
+          var username = $(this).children(":first").text();
+          username = username.slice(1, username.length-1); // Remove @ and :
+
+          displayTimeline(username);
+
+          console.log(username);
+        });
