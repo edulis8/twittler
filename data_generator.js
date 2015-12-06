@@ -13,17 +13,9 @@ streams.users.mracus = [];
 streams.users.douglascalhoun = [];
 window.users = Object.keys(streams.users);
 
+window.visitor = [];
 
-// EVENT LISTENERS
-        $(document.body).on('click', '.tweet-div',function() {
-          
-          var username = $(this).children(":first").text();
-          username = username.slice(1, username.length-1); // Remove @ and :
-
-          displayTimeline(username);
-
-          console.log(username);
-        });
+streams.users.visitor = visitor;
 
 
 // utility function for adding tweets to our data structures
@@ -31,6 +23,8 @@ var addTweet = function(newTweet){
   var username = newTweet.user;
   streams.users[username].push(newTweet);
   streams.home.push(newTweet);
+
+  dynamicallyAddTweetToSidebar(newTweet);
 
 };
 
@@ -74,9 +68,10 @@ var scheduleNextTweet = function(){
   // Append new tweets. Can this be done in index.html? 
   //How to "listen" for a function call or array change?
   prependTweet();
+
   // --------
 
-  setTimeout(scheduleNextTweet, Math.random() * 4500);
+  setTimeout(scheduleNextTweet, Math.random() * 2500);
 };
 scheduleNextTweet();
 
@@ -89,13 +84,19 @@ var writeTweet = function(message){
     throw new Error('set the global visitor property!');
   }
   var tweet = {};
-  tweet.user = visitor;
+  tweet.user = "visitor";
   tweet.message = message;
+  tweet.created_at = new Date();
   addTweet(tweet);
+
+  prependTweet();
+
 };
 
 
- function prependTweet(){
+// My Created Functions
+
+function prependTweet(){
           var index = streams.home.length - 1;
           var tweet = streams.home[index];
           var $tweet = $('<div class="tweet-div"></div>');
@@ -111,7 +112,16 @@ function formatDate(date){
 function htmlizeMessage(user, message, date){
   return '<a class="user '+user+'">@' + user +
    ':</a><span class="message">' + message +
-   '</span><span class="date">'+formatDate(date)+'</span>';
+   '</span> <span class="date">'+formatDate(date)+'</span>';
+}
+
+function dynamicallyAddTweetToSidebar(element){
+  //console.log('.timeline .'+element.user);
+
+  var newItem = $("<p><span class='sidebar-date'>"+element.created_at+":</span><br/>"+
+                element.message+"</p>");
+
+  $('.timeline.'+element.user).append(newItem);
 }
 
 

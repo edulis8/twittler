@@ -54,6 +54,14 @@
           console.log(username);
         });
 
+        $('form').submit(function(event){
+          var input =$('input').val();
+          writeTweet(input);
+
+          $('input').val("");
+
+        });
+
        
 
         // FUNCTIONS
@@ -64,32 +72,21 @@
 
           $('aside').empty();
 
-          $('aside').html("<div class='timeline'><h2>"+username+"'s timeline</h2></div>");
+          $('aside').html("<div class='timeline "+username+"'><h2>"+username+"'s timeline</h2></div>");
 
+          // Loop and append a feed of past tweets
           streams.users[username].forEach(function(element){
 
               $('.timeline').append("<p><span class='sidebar-date'>"+(element.created_at)+":</span><br/>"+
                 element.message+"</p>");
 
-          
-          
-
-          setTimeout(function(){
-            var newlength = streams.users[username.length];
-            if(newlength > length){
-              var date = streams.users[username].created_at[newlength-1],
-                  msg = streams.users[username].message[newlength-1];
-
-              $('.timeline').append("<p><span class='sidebar-date'>"+date+":</span><br/>"+
-                msg+"</p>");
-            }
-          }, 500);
-
-
           });
 
 
         }
+
+     
+
 
       });
 
