@@ -111,14 +111,14 @@ function formatDate(date){
 function htmlizeMessage(user, message, date){
   return '<a class="user '+user+'">@' + user +
    ':</a><span class="message">' + message +
-   '</span> <span class="date"><abbr class="timeago" data-livestamp="'+date.toISOString()+'"></abbr></span>';
+   '</span> <span class="date"><abbr data-livestamp="'+date.toISOString()+'"></abbr></span>';
 }
 
 function dynamicallyAddTweetToSidebar(element){
   //console.log('.timeline .'+element.user);
-
-  var newItem = $("<p><span class='sidebar-date'>"+formatDate(element.created_at)+":</span><br/>"+
-                element.message+"</p>");
+  var date = element.created_at;
+  var newItem = $("<p><span class='sidebar-date'>"+formatDate(date)+"-- </span><span class='sidebar-date' data-livestamp='"
+    +date.toISOString()+"'></span><br/>"+element.message+"</p>");
 
   newItem.prependTo($('.timeline.'+element.user));
 }

@@ -34,19 +34,14 @@
 
       $(document).ready(function(){
 
-        // Attach timeago plugin to timestamps
-
-       
-
-
-        // Test
+        
         var myDate = new Date();
         myDate = myDate.toISOString();
         $('header abbr.livestamp').attr("data-livestamp", myDate);
 
 
         var $body = $('section');
-        //$body.html('');
+        
 
         var index = streams.home.length - 1;
         while(index >= 0){
@@ -110,8 +105,10 @@
           // Loop and append a feed of past tweets
           streams.users[username].forEach(function(element){
 
-              $('.timeline').append("<p><span class='sidebar-date'>"+formatDate(element.created_at)+":</span><br/>"+
-                element.message+"</p>");
+              var date = element.created_at;
+
+              $('.timeline').append("<p><span class='sidebar-date'>"+formatDate(date)+"-- </span><span class='sidebar-date' data-livestamp='"
+              +date.toISOString()+"'></span><br/>"+element.message+"</p>");
 
           });
 
