@@ -71,7 +71,7 @@ var scheduleNextTweet = function(){
 
   // --------
 
-  setTimeout(scheduleNextTweet, Math.random() * 2500);
+  setTimeout(scheduleNextTweet, Math.random() * 3500);
 };
 scheduleNextTweet();
 
