@@ -3,7 +3,7 @@ body {
 	background-color: linen;
 	width: 800px;
 	height: 100%;
-	margin: 0 auto;
+	margin-left: 150px;
 
 }
 
@@ -11,15 +11,13 @@ h1 {
 	display: inline-block;
 }
 
-form{
-	margin-left: 20px;
-	display: inline-block;
-}
 
 input {
 	border: 1px solid black;
 	border-radius: 3px;
 	padding: 2px;
+	margin-left: 20px;
+	display: inline-block;
 }
 
 section {
@@ -81,3 +79,31 @@ aside {
 	font-weight: 500;
 }
 
+.user.visitor {
+	color: cornflowerblue;
+}
+
+
+@media (max-width: 800px) {
+	aside {
+		float: none;
+		display: none;
+
+	}
+
+	body {
+		width: 80%;
+		font-size: 150%;
+		margin: 0 auto;
+	}
+	
+	section {
+		width: 100%;
+	}
+
+	.tweet-div {
+		width: 100%;
+	}
+}
+
+	

@@ -2,15 +2,19 @@
 <html>
   <head>
     <script src="jquery.js"></script>
+    
+    <script src="moment.js"></script>
+    <script src="livestamp.min.js"></script>
     <script src="data_generator.js"></script>
+    
     <link rel="stylesheet" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Fira+Sans:400,500,300' rel='stylesheet' type='text/css'>
   </head>
   <body>
   <header>
-    <h1>Twittler</h1><form action="">
+    <h1>Twittler</h1>
       <input type="text" placeholder="tweet something ridiculous">
-    </form>
+    
   </header>
 
   <section>
@@ -29,6 +33,18 @@
     <script>
 
       $(document).ready(function(){
+
+        // Attach timeago plugin to timestamps
+
+        $("abbr.timeago").timeago();
+
+
+        // Test
+        var myDate = new Date();
+        myDate = myDate.toISOString();
+        $('header abbr.livestamp').attr("data-livestamp", myDate);
+
+
         var $body = $('section');
         //$body.html('');
 
@@ -54,13 +70,30 @@
           console.log(username);
         });
 
-        $('form').submit(function(event){
+
+        // Hoping this avoids page refresh in windows phone browser.
+        $('input').keydown(function(enter) {
+
+    
+          if(enter.keyCode == 13){
+
+            var input =$('input').val();
+            writeTweet(input);
+            $('input').val("");
+
+          }
+        });
+
+        /*
+
+        $('form').submit(function(event){ 
+          event.preventDefault();
           var input =$('input').val();
           writeTweet(input);
 
           $('input').val("");
 
-        });
+        });*/
 
        
 
@@ -72,12 +105,12 @@
 
           $('aside').empty();
 
-          $('aside').html("<div class='timeline "+username+"'><h2>"+username+"'s timeline</h2></div>");
+          $('aside').html("<h2>"+username+"'s timeline</h2><div class='timeline "+username+"'></div><div class='timeline-feed'></div>");
 
           // Loop and append a feed of past tweets
           streams.users[username].forEach(function(element){
 
-              $('.timeline').append("<p><span class='sidebar-date'>"+(element.created_at)+":</span><br/>"+
+              $('.timeline').append("<p><span class='sidebar-date'>"+formatDate(element.created_at)+":</span><br/>"+
                 element.message+"</p>");
 
           });

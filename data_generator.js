@@ -105,23 +105,22 @@ function prependTweet(){
         }
 
 function formatDate(date){
-
-  return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " (PST) - " + date.toLocaleDateString()
+  return date.toLocaleDateString()+" -- "+date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " (PST)"  
 }
 
 function htmlizeMessage(user, message, date){
   return '<a class="user '+user+'">@' + user +
    ':</a><span class="message">' + message +
-   '</span> <span class="date">'+formatDate(date)+'</span>';
+   '</span> <span class="date"><abbr class="timeago" data-livestamp="'+date.toISOString()+'"></abbr></span>';
 }
 
 function dynamicallyAddTweetToSidebar(element){
   //console.log('.timeline .'+element.user);
 
-  var newItem = $("<p><span class='sidebar-date'>"+element.created_at+":</span><br/>"+
+  var newItem = $("<p><span class='sidebar-date'>"+formatDate(element.created_at)+":</span><br/>"+
                 element.message+"</p>");
 
-  $('.timeline.'+element.user).append(newItem);
+  newItem.prependTo($('.timeline.'+element.user));
 }
 
 
