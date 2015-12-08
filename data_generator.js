@@ -7,10 +7,10 @@
 window.streams = {};
 streams.home = [];
 streams.users = {};
-streams.users.shawndrost = [];
+streams.users.ericbroberg = [];
 streams.users.sharksforcheap = [];
-streams.users.mracus = [];
-streams.users.douglascalhoun = [];
+streams.users.benedictcumberbatch = [];
+streams.users.johnsnow = [];
 window.users = Object.keys(streams.users);
 
 window.visitor = [];

@@ -84,7 +84,7 @@ aside {
 }
 
 
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
 	aside {
 		float: none;
 		display: none;
