@@ -1,0 +1,1 @@
+This was a project I completed as a student of Hack Reactor Remote. This was part of Hack Reactor's Fulcrum program, a pre-course program. I completed this project solo. It is a twitter clone built with jQuery, moment.js, and of course HTML5, CSS3 and vanilla JavaScript 
